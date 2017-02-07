@@ -1,0 +1,65 @@
+.toolbar-background-md {
+  background: transparent;
+}
+
+.button-red {
+  background-color: red;
+  color: black;
+  min-width: 2.8rem;
+  //min-width: 4rem;
+}
+
+.button-yellow {
+  background-color: yellow;
+  color: black;
+  min-width: 2.8rem;
+  //min-width: 4rem;
+}
+
+.button-green {
+  background-color: green;
+  min-width: 2.8rem;
+  //min-width: 4rem;
+}
+
+.button-blue {
+  background-color: blue;
+  min-width: 2.8rem;
+  //min-width: 4rem;
+}
+
+.item.item-md .checkbox-md {
+  margin: 2px 8px 2px 0px;
+}
+
+.checkbox-md + .item-inner ion-label{
+  margin-left: 8px;
+}
+
+ion-col {
+  padding: 0;
+  min-width: 16.3rem;
+}
+
+.scroll-content {
+  overflow-x: auto;
+}
+
+ion-badge {
+  cursor: pointer;
+}
+
+.item-md .item-button {
+  height: 2.8rem;
+}
+
+.element-buttons {
+  overflow: hidden;
+  display: flex;
+  flex-wrap: wrap;
+  height: 3.5rem;
+}
+
+ion-label {
+  display: flex;
+}

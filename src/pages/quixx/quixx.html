@@ -1,0 +1,116 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>Quixx</ion-title>
+    <ion-buttons start>
+      <button ion-button icon-only (click)="addPlayer()">
+        <ion-icon color="secondary" name="add"></ion-icon>
+      </button>
+      <button ion-button icon-only (click)="reset()">
+        <ion-icon color="primary" name="refresh"></ion-icon>
+      </button>
+      <button ion-button icon-only (click)="undo()">
+        <ion-icon color="danger" name="undo"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+<ion-content class="grid-basic-page">
+  <ion-row center>
+    <ion-col *ngFor="let player of players">
+      <ion-item>
+        <ion-input type="text" [(ngModel)]="player.name"></ion-input>
+        <button ion-button color="dark" item-right (click)="removePlayer(player)">
+          <ion-icon color="danger" name="close"></ion-icon>
+        </button>
+      </ion-item>
+    </ion-col>
+  </ion-row>
+
+  <ion-row center>
+    <ion-col *ngFor="let player of players">
+      <ion-item>
+        <div class="element-buttons">
+          <button *ngFor="let element of player.red.elements | elementFilter:player.red.getMaxSelectedIndex(); let lst = last" class="button-red" [@lineFinished]="isRedFinished()" ion-button (click)="element.toggleSelect()" [disabled]="lst && player.red.getNumberOfSelectedElements() < 5 && (element.getValue() == 12 || element.getValue() == 2)" [@state]="element.isSelected">
+          {{element.getValue()}}
+          </button>
+        </div>
+        <button class="button-red" ion-button (click)="openModal(player.red)">
+          ({{player.red.getPoints()}})
+        </button>
+      </ion-item>
+    </ion-col>
+  </ion-row>
+
+  <ion-row center>
+    <ion-col *ngFor="let player of players">
+      <ion-item>
+        <div class="element-buttons">
+          <button *ngFor="let element of player.yellow.elements | elementFilter:player.yellow.getMaxSelectedIndex(); let lst = last" class="button-yellow" [@lineFinished]="isYellowFinished()" ion-button (click)="element.toggleSelect()" [disabled]="lst && player.yellow.getNumberOfSelectedElements() < 5 && (element.getValue() == 12 || element.getValue() == 2)" [@state]="element.isSelected">
+            {{element.getValue()}}
+          </button>
+        </div>
+        <button class="button-yellow" ion-button (click)="openModal(player.yellow)">
+          ({{player.yellow.getPoints()}})
+        </button>
+      </ion-item>
+    </ion-col>
+  </ion-row>
+
+  <ion-row center>
+    <ion-col *ngFor="let player of players">
+      <ion-item>
+        <div class="element-buttons">
+          <button *ngFor="let element of player.green.elements | elementFilter:player.green.getMaxSelectedIndex(); let lst = last" class="button-green" [@lineFinished]="isGreenFinished()" ion-button (click)="element.toggleSelect()" [disabled]="lst && player.green.getNumberOfSelectedElements() < 5 && (element.getValue() == 12 || element.getValue() == 2)" [@state]="element.isSelected">
+            {{element.getValue()}}
+          </button>
+        </div>
+        <button class="button-green" ion-button (click)="openModal(player.green)">
+          ({{player.green.getPoints()}})
+        </button>
+      </ion-item>
+    </ion-col>
+  </ion-row>
+
+  <ion-row center>
+    <ion-col *ngFor="let player of players">
+      <ion-item>
+        <div class="element-buttons">
+          <button *ngFor="let element of player.blue.elements | elementFilter:player.blue.getMaxSelectedIndex(); let lst = last" class="button-blue" [@lineFinished]="isBlueFinished()" ion-button (click)="element.toggleSelect()" [disabled]="lst && player.blue.getNumberOfSelectedElements() < 5 && (element.getValue() == 12 || element.getValue() == 2)" [@state]="element.isSelected">
+          {{element.getValue()}}
+          </button>
+        </div>
+        <button class="button-blue" ion-button (click)="openModal(player.blue)">
+          ({{player.blue.getPoints()}})
+        </button>
+      </ion-item>
+    </ion-col>
+  </ion-row>
+
+  <ion-row center>
+    <ion-col *ngFor="let player of players">
+        <ion-item>
+          <button ion-button *ngFor="let fault of player.faults; let idx = index"  (click)="player.faults[idx] = !player.faults[idx]" [outline]="!player.faults[idx]" color="danger">
+            X
+          </button>
+        </ion-item>
+    </ion-col>
+  </ion-row>
+
+  <div [ngSwitch]="isGameFinished()">
+    <ion-row center *ngSwitchCase="false">
+      <ion-col>
+        <ion-item >
+          <button ion-button (click)="gameFinished = !gameFinished">Finish Game</button>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+    <ion-row center *ngSwitchCase="true">
+      <ion-col *ngFor="let player of players">
+          <ion-item >
+            <ion-label>Total</ion-label>
+            <ion-input type="number" [value]="player.getPoints()"></ion-input>
+          </ion-item>
+      </ion-col>
+    </ion-row>
+  </div>
+</ion-content>
