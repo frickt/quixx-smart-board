@@ -47,4 +47,8 @@ fastlane/release-cred/*.keystore
 fastlane/release-cred/*.jks
 fastlane/release-cred/*.json
 fastlane/report.xml
+quixx-smart-board.ipa
+quixx-smart-board.app.dSYM.zip
+9GF87JZPLL.*
+AppStore_ch.frick.quixx-smart-board.mobileprovision
 
