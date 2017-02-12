@@ -1,0 +1,87 @@
+# Customise this file, documentation can be found here:
+# https://github.com/fastlane/fastlane/tree/master/fastlane/docs
+# All available actions: https://docs.fastlane.tools/actions
+# can also be listed using the `fastlane actions` command
+
+# Change the syntax highlighting to Ruby
+# All lines starting with a # are ignored when running `fastlane`
+
+# If you want to automatically update fastlane if a new version is available:
+# update_fastlane
+
+# This is the minimum version number required.
+# Update this, if you use features of a newer version
+fastlane_version "2.14.2"
+
+default_platform :ios
+
+platform :ios do
+  desc "Compile a new build for for appstore"
+  lane :release do
+    app_name_sanitized = 'quixx-smart-board'
+    ios_project_path = "platforms/ios/#{app_name_sanitized}.xcodeproj"
+    # Compile the ionic app
+    sh("ionic build ios --release")
+    # Get certificate
+    cert
+    # Get provisioning profile
+    match(
+      type: "appstore",
+      git_url: '/Users/thomasfrick/Dropbox/development/certs',
+      app_identifier: 'ch.frick.quixx-smart-board',
+      readonly: true
+    )
+    sigh(
+      force: false
+    )
+    # Recreate schemes to ensure a smooth transition from cordova to gym
+    recreate_schemes(
+      project: ios_project_path
+    )
+    # Archive app into ipa
+    gym(
+      scheme: app_name_sanitized,
+      project: ios_project_path,
+      export_method: 'app-store'
+    )
+    deliver(
+      force: true,
+      app_icon: 'resources/icon_1024.png'
+    )
+  end
+
+  lane :test do
+    scan(
+      workspace: "./platforms/ios/quixx-smart-board.xcodeproj/project.xcworkspace",
+      scheme: "quixx-smart-board",
+      clean: false
+    )
+  end
+end
+
+platform :android do
+  desc "Compile a new build for Android"
+  lane :release do |options|
+    app_android_key = 'freakysmartlab@gmail.com'
+    sh("ionic build android --release")
+    sign_apk(
+      apk_path: "platforms/android/build/outputs/apk/android-release-unsigned.apk",
+      signed_apk_path: "platforms/android/build/outputs/apk/android-release-signed.apk",
+      keystore_path: "fastlane/release-cred/android-freakysmartlab.jks",
+      alias: app_android_key,
+    )
+    zipalign(apk_path: "#{lane_context[SharedValues::SIGNED_APK_PATH]}")
+    supply(
+      track: 'production',
+      json_key: 'fastlane/release-cred/service-account-freakysmartlab.json',
+      package_name: 'ch.frick.quixx_smart_board',
+      apk: "#{lane_context[SharedValues::SIGNED_APK_PATH]}"
+    )
+  end
+end
+
+# More information about multiple platforms in fastlane: https://github.com/fastlane/fastlane/blob/master/fastlane/docs/Platforms.md
+# All available actions: https://docs.fastlane.tools/actions
+
+# fastlane reports which actions are used
+# No personal data is recorded. Learn more at https://github.com/fastlane/enhancer

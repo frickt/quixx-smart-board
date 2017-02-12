@@ -41,4 +41,10 @@ platforms/
 plugins/
 bower_components/
 
+# Fastlane
+fastlane/.env
+fastlane/release-cred/*.keystore
+fastlane/release-cred/*.jks
+fastlane/release-cred/*.json
+fastlane/report.xml
 

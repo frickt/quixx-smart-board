@@ -1,0 +1,1 @@
+quixx-board for holding the results of the dice game Quixx.

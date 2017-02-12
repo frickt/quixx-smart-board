@@ -59,6 +59,21 @@ export class QuixxPage {
       if(players){
         JSON.parse(players).forEach((player: Player) => this.players.push(Player.revive(player)));
       }
+      if(this.players.length == 0){
+        let thomas = new PlayerFactory().createPlayer("Thomas");
+        thomas.green.elements[0].toggleSelect();
+        thomas.green.elements[2].toggleSelect();
+        thomas.green.elements[3].toggleSelect();
+        thomas.green.elements[4].toggleSelect();
+        thomas.green.elements[5].toggleSelect();
+        this.players.push(thomas);
+        let rebecca = new PlayerFactory().createPlayer("Rebecca");
+        rebecca.green.elements[0].toggleSelect();
+        rebecca.blue.elements[6].toggleSelect();
+        rebecca.blue.elements[7].toggleSelect();
+        rebecca.yellow.elements[2].toggleSelect();
+        this.players.push(rebecca);
+      }
     }).catch((err) => {
       this.players = [];
       storage.remove('quixx');
