@@ -63,6 +63,7 @@ platform :android do
   desc "Compile a new build for Android"
   lane :release do |options|
     app_android_key = 'freakysmartlab@gmail.com'
+    gradle(task: 'clean', project_dir: "platforms/android/")
     sh("ionic build android --release")
     sign_apk(
       apk_path: "platforms/android/build/outputs/apk/android-release-unsigned.apk",
@@ -71,6 +72,7 @@ platform :android do
       alias: app_android_key,
     )
     zipalign(apk_path: "#{lane_context[SharedValues::SIGNED_APK_PATH]}")
+
     supply(
       track: 'production',
       json_key: 'fastlane/release-cred/service-account-freakysmartlab.json',
