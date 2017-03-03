@@ -1,2 +1,3 @@
-quixx-board for holding the results of the dice game Quixx.
+Qwixx-board for holding the results of the dice game Qwixx.
 Multiplayer capable.
+No ads.

@@ -22,8 +22,8 @@ import {RevertService} from './revert.service';
       state('true', style({
         backgroundColor: 'black',
         color: 'white'})),
-      transition('* => void', animate('400ms', style({
-        transform: 'translateX(-100%)',
+      transition('* => void', animate('600ms', style({
+        //transform: 'translateX(-100%)',
         opacity: 0
       }))),
       transition('0 => 1', animate('400ms', style({
@@ -44,7 +44,7 @@ export class QuixxPage {
   public gameFinished :boolean = false;
   constructor(public navCtrl: NavController, public modalController: ModalController, public platform: Platform,
               public storage: Storage, public changeDetectorRef: ChangeDetectorRef) {
-    platform.backButton.subscribe(() => {
+    platform.registerBackButtonAction(() => {
       storage.set('quixx', JSON.stringify(this.players));
     });
     platform.pause.subscribe(() => {

@@ -1,1 +1,1 @@
-quixx, Tafel, Brett, Würfel, Würfelspiel, Quixx
+qwixx, Tafel, Brett, Würfel, Würfelspiel, Qwixx

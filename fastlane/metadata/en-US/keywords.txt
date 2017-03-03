@@ -1,1 +1,1 @@
-quixx, board, dice, Quixx
+qwixx, board, dice, Qwixx
