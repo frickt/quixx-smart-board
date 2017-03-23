@@ -18,7 +18,7 @@ default_platform :ios
 platform :ios do
   desc "Compile a new build for for appstore"
   lane :release do
-    app_name_sanitized = 'Qwixx Board'
+    app_name_sanitized = 'QBoard'
     ios_project_path = "platforms/ios/#{app_name_sanitized}.xcodeproj"
     # Compile the ionic app
     sh("ionic build ios --release")

@@ -1,1 +1,1 @@
-Qwixx-Tafel für das festhalten der Resultate für das Würfelspiel Qwixx.
+QBoard für das festhalten der Resultate für das Würfelspiel.

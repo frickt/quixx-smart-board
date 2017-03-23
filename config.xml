@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<widget id="ch.frick.quixx-smart-board" version="0.0.8" xmlns="http://www.w3.org/ns/widgets">
-  <name>Qwixx Board</name>
+<widget id="ch.frick.quixx-smart-board" version="0.1.0" xmlns="http://www.w3.org/ns/widgets">
+  <name>QBoard</name>
   <description>An awesome Ionic/Cordova app.</description>
   <author email="freakysmartlab@gmail.com" href="http://ionicframework.com/">Ionic Framework Team</author>
   <content src="index.html"/>

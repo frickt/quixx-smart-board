@@ -1,1 +1,1 @@
-Qwixx board
+QBoard

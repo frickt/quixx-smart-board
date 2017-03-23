@@ -1,1 +1,1 @@
-Qwixx-board for holding the results of the dice game Qwixx.
+QBoard for holding the results of the dice game.
